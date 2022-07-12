@@ -8,7 +8,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.travel"
+        applicationId "com.example.wordle_1A2B"
         minSdk 30
         targetSdk 31
         versionCode 1
