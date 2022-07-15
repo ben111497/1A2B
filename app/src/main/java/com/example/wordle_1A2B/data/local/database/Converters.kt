@@ -1,4 +1,4 @@
-package com.example.wordle_1A2B.database
+package com.example.wordle_1A2B.data.local.database
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

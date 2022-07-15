@@ -1,4 +1,4 @@
-package com.example.wordle_1A2B.adapter
+package com.example.wordle_1A2B.ui.component.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,9 +1,8 @@
-package com.example.wordle_1A2B.activity.viewModel
+package com.example.wordle_1A2B.ui.component.activity.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.wordle_1A2B.activity.repository.MainRepository
 
 //ViewModel
 //定義一個 viewModel，用來跟 Repository 溝通取得資料，一般會配合 LiveData 使用

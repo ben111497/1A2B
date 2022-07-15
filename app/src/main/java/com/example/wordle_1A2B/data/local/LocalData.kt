@@ -1,15 +1,16 @@
-package com.example.wordle_1A2B.basic
+package com.example.wordle_1A2B.data.local
 
 import android.content.Context
 import android.util.Log
-import com.example.wordle_1A2B.database.API
-import com.example.wordle_1A2B.database.DataBase
+import com.example.wordle_1A2B.data.local.database.API
+import com.example.wordle_1A2B.data.local.database.DataBase
 import com.google.gson.Gson
 import kotlinx.coroutines.*
 import java.lang.Exception
+import javax.inject.Inject
 
-open class BaseLocalRepository constructor(context: Context) {
-    private val dataBase: DataBase by lazy { DataBase.instance(context) }
+open class LocalData constructor(context: Context) {
+    val dataBase: DataBase by lazy { DataBase.instance(context) }
 
     /**
      * local

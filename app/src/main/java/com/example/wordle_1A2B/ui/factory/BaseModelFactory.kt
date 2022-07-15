@@ -1,9 +1,9 @@
-package com.example.wordle_1A2B.fragment.factory
+package com.example.wordle_1A2B.ui.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.wordle_1A2B.fragment.repository.HomepageRepository
-import com.example.wordle_1A2B.fragment.viewModel.HomepageViewModel
+import com.example.wordle_1A2B.ui.component.fragment.homepage.HomepageRepository
+import com.example.wordle_1A2B.ui.component.fragment.homepage.HomepageViewModel
 
 class BaseModelFactory <T> (private val repository: T) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

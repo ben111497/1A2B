@@ -1,12 +1,12 @@
-package com.example.wordle_1A2B.fragment.viewModel
+package com.example.wordle_1A2B.ui.component.fragment.homepage
 
+import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.wordle_1A2B.fragment.repository.HomepageRepository
 import com.example.wordle_1A2B.utils.addAll
 
-class HomepageViewModel(private val repository: HomepageRepository): ViewModel() {
+class HomepageViewModel  constructor(private val repository: HomepageRepository): ViewModel() {
     val timerCount = MutableLiveData<Int>().also { it.value = 0 }
     val viewList = MutableLiveData<ArrayList<View>>().also { it.value = ArrayList<View>() }
 

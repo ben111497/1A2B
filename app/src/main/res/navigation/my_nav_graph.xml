@@ -6,6 +6,6 @@
     app:startDestination="@id/homePageFragment">
     <fragment
         android:id="@+id/homePageFragment"
-        android:name="com.example.wordle_1A2B.fragment.view.HomePageFragment"
+        android:name="com.example.wordle_1A2B.ui.component.fragment.homepage.HomePageFragment"
         android:label="HomePageFragment" />
 </navigation>

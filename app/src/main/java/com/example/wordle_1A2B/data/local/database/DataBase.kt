@@ -1,4 +1,4 @@
-package com.example.wordle_1A2B.database
+package com.example.wordle_1A2B.data.local.database
 
 import android.content.Context
 import androidx.room.*
@@ -7,7 +7,6 @@ const val Table_API = "API"
 const val DB_Version = 2
 
 @Database(entities = [API::class], version = DB_Version)
-
 @TypeConverters(Converters::class)
 abstract class DataBase: RoomDatabase() {
     companion object {

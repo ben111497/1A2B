@@ -1,16 +1,15 @@
-package com.example.wordle_1A2B.tools
+package com.example.wordle_1A2B.data.local
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import javax.inject.Inject
 
-class SharedPreferences(application: Application) {
-    private var context: Context = application
+class SharedPreferences constructor(context: Context) {
     companion object {
         private const val Name = "Name"
     }
 
-    private val sp: SharedPreferences = application.getSharedPreferences("wordle", Context.MODE_PRIVATE)
+    private val sp: SharedPreferences = context.getSharedPreferences("1A2B", Context.MODE_PRIVATE)
 
     fun clear() = sp.edit().clear().apply()
 

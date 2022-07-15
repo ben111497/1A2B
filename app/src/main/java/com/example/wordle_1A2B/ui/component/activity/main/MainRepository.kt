@@ -1,4 +1,4 @@
-package com.example.wordle_1A2B.activity.repository
+package com.example.wordle_1A2B.ui.component.activity.main
 
 import androidx.lifecycle.SavedStateHandle
 

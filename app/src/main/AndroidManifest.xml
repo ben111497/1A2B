@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionBar">
         <activity
-            android:name="com.example.wordle_1A2B.activity.view.MainActivity"
+            android:name="com.example.wordle_1A2B.ui.component.activity.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

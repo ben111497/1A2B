@@ -1,4 +1,4 @@
-package com.example.wordle_1A2B.activity.view
+package com.example.wordle_1A2B.ui.component.activity.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProviders
 import com.example.wordle_1A2B.databinding.ActivityMainBinding
-import com.example.wordle_1A2B.activity.viewModel.MainViewModel
-import com.example.wordle_1A2B.database.DataBase
+import com.example.wordle_1A2B.data.local.database.DataBase
 import com.example.wordle_1A2B.tools.MyObserver
-import com.example.wordle_1A2B.tools.SharedPreferences
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
