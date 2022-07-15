@@ -1,16 +1,19 @@
 package com.example.wordle_1A2B.ui.base
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
 
-abstract class BaseFragment<ViewModel: androidx.lifecycle.ViewModel, binding: ViewBinding>: Fragment() {
+abstract class BaseActivity<ViewModel: androidx.lifecycle.ViewModel, binding: ViewBinding>: AppCompatActivity() {
     lateinit var viewModel: ViewModel
-    var binding: binding? = null
+    lateinit var binding: binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,15 +21,11 @@ abstract class BaseFragment<ViewModel: androidx.lifecycle.ViewModel, binding: Vi
         initViewModel()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return binding?.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         observeViewModel()
         setListener()
         init()
+        return super.onCreateView(name, context, attrs)
     }
 
     abstract fun initViewBinding()

@@ -1,6 +1,5 @@
 package com.example.wordle_1A2B.ui.component.fragment.homepage
 
-import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
