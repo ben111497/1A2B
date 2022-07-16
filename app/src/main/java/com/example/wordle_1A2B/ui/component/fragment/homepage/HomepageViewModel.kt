@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.wordle_1A2B.utils.addAll
 
-class HomepageViewModel  constructor(private val repository: HomepageRepository): ViewModel() {
+class HomepageViewModel constructor(private val repository: HomepageRepository): ViewModel() {
     val timerCount = MutableLiveData<Int>().also { it.value = 0 }
     val viewList = MutableLiveData<ArrayList<View>>().also { it.value = ArrayList<View>() }
 

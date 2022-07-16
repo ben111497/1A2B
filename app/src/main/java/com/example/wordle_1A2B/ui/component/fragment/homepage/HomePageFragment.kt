@@ -18,7 +18,7 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
     private lateinit var timer: Timer
 
     override fun initViewModel() {
-        viewModel = ViewModelProviders.of(requireActivity(), BaseModelFactory(HomepageRepository(LocalData(requireContext())))).get(HomepageViewModel::class.java)
+        viewModel = ViewModelProviders.of(requireActivity(), BaseModelFactory(HomepageRepository(LocalData(requireContext()))))[HomepageViewModel::class.java]
     }
 
     override fun initViewBinding() {
