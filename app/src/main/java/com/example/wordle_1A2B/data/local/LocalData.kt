@@ -9,8 +9,8 @@ import kotlinx.coroutines.*
 import java.lang.Exception
 import javax.inject.Inject
 
-open class LocalData constructor(context: Context) {
-    val dataBase: DataBase by lazy { DataBase.instance(context) }
+open class LocalData constructor(private val context: Context) {
+    private val dataBase: DataBase get() { return DataBase.instance(context) }
 
     /**
      * local
