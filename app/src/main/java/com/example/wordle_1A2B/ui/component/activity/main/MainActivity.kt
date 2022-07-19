@@ -22,7 +22,7 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>() {
     override fun init() {
         DataBase.instance(this)
         //viewModel.repository.name = SharedPreferences(application).getName()
-        lifecycle.addObserver(MyObserver())
+        //lifecycle.addObserver(MyObserver())
     }
 
     override fun setListener() {

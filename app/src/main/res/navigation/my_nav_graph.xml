@@ -7,5 +7,13 @@
     <fragment
         android:id="@+id/homePageFragment"
         android:name="com.example.wordle_1A2B.ui.component.fragment.homepage.HomePageFragment"
-        android:label="HomePageFragment" />
+        android:label="HomePageFragment" >
+        <action
+            android:id="@+id/action_homePageFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.example.wordle_1A2B.ui.component.fragment.Game.GameFragment"
+        android:label="GameFragment" />
 </navigation>

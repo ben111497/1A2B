@@ -3,6 +3,7 @@ package com.example.wordle_1A2B.ui.component.fragment.homepage
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.example.wordle_1A2B.R
 import com.example.wordle_1A2B.data.local.LocalData
 import com.example.wordle_1A2B.databinding.FragmentHomepageBinding
@@ -18,7 +19,7 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
     private lateinit var timer: Timer
 
     override fun initViewModel() {
-        viewModel = ViewModelProviders.of(requireActivity(), BaseModelFactory(HomepageRepository(LocalData(requireContext()))))[HomepageViewModel::class.java]
+        viewModel = ViewModelProviders.of(requireActivity(), BaseModelFactory(requireContext(), HomepageRepository(LocalData(requireContext()))))[HomepageViewModel::class.java]
     }
 
     override fun initViewBinding() {
@@ -41,7 +42,10 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
 
     override fun setListener() {
         binding?.run {
-            cl4Words.setOnClickListener { stopTitleAnimate() }
+            cl4Words.setOnClickListener {
+                stopTitleAnimate()
+                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameFragment)
+            }
         }
     }
 
