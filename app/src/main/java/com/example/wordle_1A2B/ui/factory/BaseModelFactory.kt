@@ -3,8 +3,8 @@ package com.example.wordle_1A2B.ui.factory
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.wordle_1A2B.ui.component.fragment.Game.GameRepository
-import com.example.wordle_1A2B.ui.component.fragment.Game.GameViewModel
+import com.example.wordle_1A2B.ui.component.fragment.game.GameRepository
+import com.example.wordle_1A2B.ui.component.fragment.game.GameViewModel
 import com.example.wordle_1A2B.ui.component.fragment.homepage.HomepageRepository
 import com.example.wordle_1A2B.ui.component.fragment.homepage.HomepageViewModel
 

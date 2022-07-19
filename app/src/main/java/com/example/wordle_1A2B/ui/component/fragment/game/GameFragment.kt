@@ -1,4 +1,4 @@
-package com.example.wordle_1A2B.ui.component.fragment.Game
+package com.example.wordle_1A2B.ui.component.fragment.game
 
 import androidx.lifecycle.ViewModelProviders
 import com.example.wordle_1A2B.data.local.LocalData
@@ -33,6 +33,7 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
     }
 
     override fun init() {
+        viewModel.setReplyCount(0)
         viewModel.setWordNumber(4)
         viewModel.setAnswer()
         viewModel.initViewList()
@@ -41,13 +42,14 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
             binding?.lvGame?.adapter = adapter
         } else {
             adapter?.notifyDataSetChanged()
+            binding?.lvGame?.smoothScrollToPosition(viewModel.getReplyCount())
         }
     }
 
     override fun setListener() {
         binding?.run {
-            tvClear.setOnClickListener { viewModel.clearCurrentAnswer() }
-            tvConfirm.setOnClickListener {  }
+            tvClear.setOnClickListener { viewModel.clearAnswer() }
+            tvConfirm.setOnClickListener { viewModel.confirmAnswer() }
 
             tv1.setOnClickListener(viewModel.getClickObject())
             tv2.setOnClickListener(viewModel.getClickObject())

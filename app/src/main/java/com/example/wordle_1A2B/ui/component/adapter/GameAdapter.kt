@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import com.example.wordle_1A2B.R
 import com.example.wordle_1A2B.data.dto.GameClass
+import com.example.wordle_1A2B.data.dto.GameResultStatus
 import com.example.wordle_1A2B.databinding.ItemGameBinding
 
 class GameAdapter(context: Context, private val word: Int, private val list: ArrayList<GameClass.Reply>)
@@ -45,6 +46,7 @@ class GameAdapter(context: Context, private val word: Int, private val list: Arr
         }
 
         val item = list[position]
+
         for (i in 0 until word) {
             when (i) {
                 0 -> holder.tvAnswer1.text = if (i >= item.answer.size) "" else "${item.answer[i]}"
@@ -53,7 +55,13 @@ class GameAdapter(context: Context, private val word: Int, private val list: Arr
                 3 -> holder.tvAnswer4.text = if (i >= item.answer.size) "" else "${item.answer[i]}"
             }
         }
+
         holder.gpResult.visibility = if (item.result.size == 0) View.GONE else View.VISIBLE
+        if (item.result.size == word) {
+            holder.gpResult.visibility = View.VISIBLE
+            holder.tv1A.text = "${item.result.count { it == GameResultStatus.Correct }}"
+            holder.tv2B.text = "${item.result.count { it == GameResultStatus.PositionError }}"
+        } else holder.gpResult.visibility = View.GONE
 
         return view
     }

@@ -1,4 +1,4 @@
-package com.example.wordle_1A2B.ui.component.fragment.Game
+package com.example.wordle_1A2B.ui.component.fragment.game
 
 import com.example.wordle_1A2B.data.local.LocalData
 
