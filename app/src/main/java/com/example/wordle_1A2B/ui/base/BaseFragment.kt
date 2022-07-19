@@ -16,6 +16,7 @@ abstract class BaseFragment<ViewModel: androidx.lifecycle.ViewModel, binding: Vi
         super.onCreate(savedInstanceState)
         initViewBinding()
         initViewModel()
+        argument(arguments)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,6 +32,7 @@ abstract class BaseFragment<ViewModel: androidx.lifecycle.ViewModel, binding: Vi
 
     abstract fun initViewBinding()
     abstract fun initViewModel()
+    abstract fun argument(bundle: Bundle?)
     abstract fun observeViewModel()
     abstract fun init()
     abstract fun setListener()

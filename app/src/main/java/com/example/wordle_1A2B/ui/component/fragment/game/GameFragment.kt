@@ -1,5 +1,6 @@
 package com.example.wordle_1A2B.ui.component.fragment.game
 
+import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import com.example.wordle_1A2B.data.local.LocalData
 import com.example.wordle_1A2B.databinding.FragmentGameBinding
@@ -21,6 +22,12 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
         binding = FragmentGameBinding.inflate(layoutInflater)
     }
 
+    override fun argument(bundle: Bundle?) {
+        bundle?.let {
+            viewModel.setWordNumber(it.getInt("Word"))
+        }
+    }
+
     override fun observeViewModel() {
         observe(viewModel.viewList) {
             if (adapter == null) {
@@ -34,7 +41,6 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
 
     override fun init() {
         viewModel.setReplyCount(0)
-        viewModel.setWordNumber(4)
         viewModel.setAnswer()
         viewModel.initViewList()
         if (adapter == null) {

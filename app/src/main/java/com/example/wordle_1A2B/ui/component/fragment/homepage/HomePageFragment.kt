@@ -1,5 +1,6 @@
 package com.example.wordle_1A2B.ui.component.fragment.homepage
 
+import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.ViewModelProviders
@@ -26,6 +27,8 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
         binding = FragmentHomepageBinding.inflate(layoutInflater)
     }
 
+    override fun argument(bundle: Bundle?) {}
+
     override fun observeViewModel() {
         observe(viewModel.timerCount) {
             if (it < viewModel.getViewList().size) {
@@ -44,7 +47,15 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
         binding?.run {
             cl4Words.setOnClickListener {
                 stopTitleAnimate()
-                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameFragment)
+                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameFragment, Bundle().also { it.putInt("Word", 4) })
+            }
+            cl5Words.setOnClickListener {
+                stopTitleAnimate()
+                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameFragment, Bundle().also { it.putInt("Word", 5) })
+            }
+            cl6Words.setOnClickListener {
+                stopTitleAnimate()
+                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameFragment, Bundle().also { it.putInt("Word", 6) })
             }
         }
     }
