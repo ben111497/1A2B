@@ -1,24 +1,22 @@
 package com.example.wordle_1A2B.ui.component.fragment.game
 
-import android.content.Context
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.wordle_1A2B.data.dto.GameClass
 import com.example.wordle_1A2B.data.dto.GameResultStatus
-import com.example.wordle_1A2B.utils.showToast
 import kotlin.random.Random
 
-class GameViewModel constructor(private val context: Context, private val repository: GameRepository): ViewModel() {
+class GameViewModel constructor(private val repository: GameRepository): ViewModel() {
     var word: Int = 0
     var answerList = ArrayList<Int>()
     val isGameEnd: Boolean get() = getViewList()[getReplyCount()].result.count { it == GameResultStatus.Correct } == word
 
     val viewList = MutableLiveData<ArrayList<GameClass.Reply>>().also { it.value = ArrayList() }
     val replyCount = MutableLiveData<Int>().also { it.value = 0 }
+    val message = MutableLiveData<String>().also { it.value = "" }
 
     /**
      * Control Data
@@ -40,13 +38,19 @@ class GameViewModel constructor(private val context: Context, private val reposi
     fun setReplyCount(count: Int) = count.also { replyCount.value = it }
     fun getReplyCount() = replyCount.value!!
 
+    fun setMessage(msg: String) = msg.also { message.value = it }
+
+    /**
+     * Other Function
+     */
+
     fun getClickObject(): View.OnClickListener {
         return View.OnClickListener { v ->
             v?.let { view ->
                 val number = (view as TextView).text.toString().toInt()
                 when {
-                    getViewList()[getReplyCount()].answer.size >= word -> context.showToast("已填滿數字", Toast.LENGTH_SHORT)
-                    getViewList()[getReplyCount()].answer.contains(number) -> context.showToast("數字重複！", Toast.LENGTH_SHORT)
+                    getViewList()[getReplyCount()].answer.size >= word -> setMessage("已填滿數字")
+                    getViewList()[getReplyCount()].answer.contains(number) -> setMessage("數字重複")
                     else -> {
                         getViewList()[getReplyCount()].answer.add(number)
                         viewList.value = getViewList()
@@ -67,13 +71,9 @@ class GameViewModel constructor(private val context: Context, private val reposi
         Log.e("answer", "$answerList")
     }
 
-    /**
-     * Other Function
-     */
-
     fun clearAnswer(count: Int = getReplyCount()) {
         if (isGameEnd) {
-            context.showToast("遊戲已結束")
+            setMessage("遊戲已結束")
             return
         }
 
@@ -83,7 +83,7 @@ class GameViewModel constructor(private val context: Context, private val reposi
 
     fun confirmAnswer() {
         if (isGameEnd) {
-            context.showToast("遊戲已結束")
+            setMessage("遊戲已結束")
             return
         }
 
@@ -91,7 +91,7 @@ class GameViewModel constructor(private val context: Context, private val reposi
         val list = ArrayList<Int>().also { it.addAll(answerList) }
 
         if (data.answer.size != word) {
-            context.showToast("請填寫完整！")
+            setMessage("請填寫完整！")
             return
         }
 
@@ -114,7 +114,7 @@ class GameViewModel constructor(private val context: Context, private val reposi
 
         if (isGameEnd) {
             viewList.value = getViewList()
-            context.showToast("遊戲勝利")
+            setMessage("遊戲勝利！")
         } else {
             setReplyCount(getReplyCount() + 1)
             addViewList()

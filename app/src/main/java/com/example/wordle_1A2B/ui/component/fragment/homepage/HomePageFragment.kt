@@ -9,6 +9,7 @@ import com.example.wordle_1A2B.R
 import com.example.wordle_1A2B.data.local.LocalData
 import com.example.wordle_1A2B.databinding.FragmentHomepageBinding
 import com.example.wordle_1A2B.ui.base.BaseFragment
+import com.example.wordle_1A2B.ui.component.dialog.game.GameDialogFragment
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
 import com.example.wordle_1A2B.utils.observe
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,7 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
     private lateinit var timer: Timer
 
     override fun initViewModel() {
-        viewModel = ViewModelProviders.of(requireActivity(), BaseModelFactory(requireContext(), HomepageRepository(LocalData(requireContext()))))[HomepageViewModel::class.java]
+        viewModel = ViewModelProviders.of(requireActivity(), BaseModelFactory(HomepageRepository(LocalData(requireContext()))))[HomepageViewModel::class.java]
     }
 
     override fun initViewBinding() {
@@ -54,8 +55,9 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
                 Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameFragment, Bundle().also { it.putInt("Word", 5) })
             }
             cl6Words.setOnClickListener {
-                stopTitleAnimate()
-                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameFragment, Bundle().also { it.putInt("Word", 6) })
+//                stopTitleAnimate()
+//                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameFragment, Bundle().also { it.putInt("Word", 6) })
+                GameDialogFragment().show(requireActivity().supportFragmentManager, "hi")
             }
         }
     }
