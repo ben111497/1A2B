@@ -29,21 +29,21 @@ constructor(private val widthPercent: Double = -1.0, private val heightPercent: 
         super.onViewCreated(view, savedInstanceState)
         val screenWidth = context?.getScreenWidthPixel() ?: 0
 
-        /*
-        == 0.0 -> Match
-        < 0.0 -> Wrap (預設)
-        other -> 指定百分比寬度*/
-
+        /**
+        x == 0.0 -> Match
+        x < 0.0 -> Wrap (預設)
+        other -> 指定百分比寬度
+         */
         val width = when {
             widthPercent == 0.0 -> screenWidth
             widthPercent < 0.0 -> WindowManager.LayoutParams.WRAP_CONTENT
-            else -> screenWidth * widthPercent
+            else -> screenWidth * if (widthPercent > 1.0) 1.0 else widthPercent
         }.toInt()
 
         val height = when {
             heightPercent == 0.0 -> screenWidth
             heightPercent < 0.0 -> WindowManager.LayoutParams.WRAP_CONTENT
-            else -> screenWidth * heightPercent
+            else -> screenWidth * if (heightPercent > 1.0) 1.0 else heightPercent
         }.toInt()
 
         dialog?.window?.setLayout(width, height)

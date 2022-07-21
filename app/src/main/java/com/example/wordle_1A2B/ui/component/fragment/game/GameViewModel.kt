@@ -12,11 +12,12 @@ import kotlin.random.Random
 class GameViewModel constructor(private val repository: GameRepository): ViewModel() {
     var word: Int = 0
     var answerList = ArrayList<Int>()
-    val isGameEnd: Boolean get() = getViewList()[getReplyCount()].result.count { it == GameResultStatus.Correct } == word
+    val isGameWin: Boolean get() = getViewList()[getReplyCount()].result.count { it == GameResultStatus.Correct } == word
 
     val viewList = MutableLiveData<ArrayList<GameClass.Reply>>().also { it.value = ArrayList() }
     val replyCount = MutableLiveData<Int>().also { it.value = 0 }
     val message = MutableLiveData<String>().also { it.value = "" }
+    val isDialogOn = MutableLiveData<Boolean>().also { it.value = false }
 
     /**
      * Control Data
@@ -39,6 +40,9 @@ class GameViewModel constructor(private val repository: GameRepository): ViewMod
     fun getReplyCount() = replyCount.value!!
 
     fun setMessage(msg: String) = msg.also { message.value = it }
+    
+    fun setIsDialogOn(isOn: Boolean) = isOn.also { isDialogOn.value = it }
+    fun getIsDialogOn() = isDialogOn.value!!
 
     /**
      * Other Function
@@ -72,7 +76,7 @@ class GameViewModel constructor(private val repository: GameRepository): ViewMod
     }
 
     fun clearAnswer(count: Int = getReplyCount()) {
-        if (isGameEnd) {
+        if (isGameWin) {
             setMessage("遊戲已結束")
             return
         }
@@ -82,7 +86,7 @@ class GameViewModel constructor(private val repository: GameRepository): ViewMod
     }
 
     fun confirmAnswer() {
-        if (isGameEnd) {
+        if (isGameWin) {
             setMessage("遊戲已結束")
             return
         }
@@ -112,9 +116,10 @@ class GameViewModel constructor(private val repository: GameRepository): ViewMod
             }
         }
 
-        if (isGameEnd) {
+        if (getViewList()[getReplyCount()].result.count { it == GameResultStatus.Correct } == word) {
             viewList.value = getViewList()
             setMessage("遊戲勝利！")
+            setIsDialogOn(true)
         } else {
             setReplyCount(getReplyCount() + 1)
             addViewList()

@@ -9,6 +9,8 @@ import com.example.wordle_1A2B.data.local.LocalData
 import com.example.wordle_1A2B.databinding.FragmentGameBinding
 import com.example.wordle_1A2B.ui.base.BaseFragment
 import com.example.wordle_1A2B.ui.component.adapter.GameAdapter
+import com.example.wordle_1A2B.ui.component.dialog.game.GameDialog
+import com.example.wordle_1A2B.ui.component.dialog.show_message.ShowMessageDialog
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
 import com.example.wordle_1A2B.utils.observe
 import com.example.wordle_1A2B.utils.showToast
@@ -25,9 +27,7 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
     }
 
     override fun argument(bundle: Bundle?) {
-        bundle?.let {
-            viewModel.setWordNumber(it.getInt("Word"))
-        }
+        bundle?.let { viewModel.setWordNumber(it.getInt("Word")) }
     }
 
     override fun observeViewModel() {
@@ -41,12 +41,26 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
         }
 
         observe(viewModel.message) { if (it.isNotEmpty()) requireContext().showToast(it) }
+
+        observe(viewModel.isDialogOn) {
+            if (it) {
+                GameDialog().also { it.setListener(object: GameDialog.Listener{
+                    override fun onOk() {}
+
+                    override fun onLeave() {
+                        Navigation.findNavController(binding?.root ?: return).popBackStack()
+                    }
+                }) }.show(requireActivity().supportFragmentManager, "hi")
+            }
+        }
     }
 
     override fun init() {
+        viewModel.initViewList()
         viewModel.setReplyCount(0)
         viewModel.setAnswer()
-        viewModel.initViewList()
+        viewModel.setIsDialogOn(false)
+        viewModel.setMessage("")
 
         if (adapter == null) {
             adapter = GameAdapter(requireContext(), viewModel.word, viewModel.getViewList())
@@ -55,22 +69,13 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
             adapter?.notifyDataSetChanged()
             binding?.lvGame?.smoothScrollToPosition(viewModel.getReplyCount())
         }
-
-        requireActivity().onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (viewModel.isGameEnd) {
-                    Navigation.findNavController(binding?.root ?: return).popBackStack()
-                } else {
-                    requireContext().showToast("遊戲尚未結束，是否要離開")
-                }
-            }
-        })
     }
 
     override fun setListener() {
         binding?.run {
             tvClear.setOnClickListener { viewModel.clearAnswer() }
             tvConfirm.setOnClickListener { viewModel.confirmAnswer() }
+            imgLeave.setOnClickListener { leave() }
 
             tv1.setOnClickListener(viewModel.getClickObject())
             tv2.setOnClickListener(viewModel.getClickObject())
@@ -82,6 +87,27 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
             tv8.setOnClickListener(viewModel.getClickObject())
             tv9.setOnClickListener(viewModel.getClickObject())
             tv0.setOnClickListener(viewModel.getClickObject())
+        }
+
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() { leave() }
+        })
+    }
+
+    private fun leave() {
+        if (viewModel.isGameWin) {
+            Navigation.findNavController(binding?.root ?: return).popBackStack()
+        } else {
+            ShowMessageDialog<ViewModel> {
+                it.setTitle("遊戲尚未結束，是否要離開？")
+                it.setListener(object: ShowMessageDialog.Listener {
+                    override fun onOk() {
+                        it.dismiss()
+                        Navigation.findNavController(binding?.root ?: return).popBackStack()
+                    }
+                })
+            }.show(requireActivity().supportFragmentManager, "message")
         }
     }
 }

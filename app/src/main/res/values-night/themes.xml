@@ -19,4 +19,9 @@
         <item name="android:windowEnterAnimation">@anim/dialog_zoom_enter</item>
         <item name="android:windowExitAnimation">@anim/dialog_zoom_exit</item>
     </style>
+
+    <style name="Theme_Dialog" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+    </style>
 </resources>

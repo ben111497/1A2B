@@ -6,6 +6,9 @@
         <entry key="app/src/main/res/drawable-mdpi/rp_button_select.xml" value="0.3201754385964912" />
         <entry key="app/src/main/res/drawable/bg_game_answer.xml" value="0.3201754385964912" />
         <entry key="app/src/main/res/drawable/bg_rectangle_white_10.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/bg_rectangle_white_15_alpha_95.xml" value="0.3201754385964912" />
+        <entry key="app/src/main/res/drawable/bg_rectengle_white_15_alpha_95.xml" value="0.2442982456140351" />
+        <entry key="app/src/main/res/drawable/bg_white_line_gray_5.xml" value="0.2442982456140351" />
         <entry key="app/src/main/res/drawable/circle_top_10.xml" value="0.3802083333333333" />
         <entry key="app/src/main/res/drawable/list_background.xml" value="0.21979166666666666" />
         <entry key="app/src/main/res/drawable/list_picture.xml" value="0.3802083333333333" />
@@ -19,12 +22,17 @@
         <entry key="app/src/main/res/drawable/rp_rectangle_f2efd37d_20.xml" value="0.3802083333333333" />
         <entry key="app/src/main/res/drawable/rp_rectangle_f2f1b948_20_right.xml" value="0.3802083333333333" />
         <entry key="app/src/main/res/drawable/rp_rectangle_fbfbfb_line_efefef.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/drawable/rp_rectangle_space_bottom_left_15.xml" value="0.2442982456140351" />
+        <entry key="app/src/main/res/drawable/rp_rectangle_space_bottom_right_15.xml" value="0.2442982456140351" />
         <entry key="app/src/main/res/drawable/rprp.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/aaa.xml" value="0.75" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/dialog_game_victory.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/dialog_game_victory.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/dialog_message.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/dialog_system_message.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.3640625" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_game.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_game.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_homepage.xml" value="0.2931570762052877" />
         <entry key="app/src/main/res/layout/item_game.xml" value="0.5" />
