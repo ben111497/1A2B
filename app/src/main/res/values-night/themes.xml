@@ -24,4 +24,14 @@
         <item name="android:windowMinWidthMajor">100%</item>
         <item name="android:windowMinWidthMinor">100%</item>
     </style>
+
+    <style name="RippleButton">
+        <item name="android:theme">@style/SelectableItemThemeColor</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="SelectableItemThemeColor">
+        <item name="colorControlHighlight">#44000000</item>
+    </style>
+
 </resources>

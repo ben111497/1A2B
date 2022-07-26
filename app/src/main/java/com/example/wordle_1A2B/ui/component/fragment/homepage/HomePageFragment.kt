@@ -47,15 +47,15 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
         binding?.run {
             cl4Words.setOnClickListener {
                 stopTitleAnimate()
-                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameFragment, Bundle().also { it.putInt("Word", 4) })
+                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameModeSelectFragment, Bundle().also { it.putInt("Word", 4) })
             }
             cl5Words.setOnClickListener {
                 stopTitleAnimate()
-                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameFragment, Bundle().also { it.putInt("Word", 5) })
+                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameModeSelectFragment, Bundle().also { it.putInt("Word", 5) })
             }
             cl6Words.setOnClickListener {
                 stopTitleAnimate()
-                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameFragment, Bundle().also { it.putInt("Word", 6) })
+                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameModeSelectFragment, Bundle().also { it.putInt("Word", 6) })
             }
         }
     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.wordle_1A2B.ui.component.fragment.game.GameRepository
 import com.example.wordle_1A2B.ui.component.fragment.game.GameViewModel
+import com.example.wordle_1A2B.ui.component.fragment.game.game_mode_select.GameModeSelectViewModel
 import com.example.wordle_1A2B.ui.component.fragment.homepage.HomepageRepository
 import com.example.wordle_1A2B.ui.component.fragment.homepage.HomepageViewModel
 
