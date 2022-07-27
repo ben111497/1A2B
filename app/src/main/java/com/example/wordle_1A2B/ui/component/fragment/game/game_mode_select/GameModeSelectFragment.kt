@@ -14,6 +14,7 @@ import com.example.wordle_1A2B.ui.component.adapter.GameModeAdapter
 import com.example.wordle_1A2B.ui.component.fragment.game.GameRepository
 import com.example.wordle_1A2B.ui.component.fragment.game.GameViewModel
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
+import com.example.wordle_1A2B.utils.setOnBackPressed
 
 class GameModeSelectFragment: BaseFragment<GameViewModel, FragmentGameModeSelectBinding>() {
     private var adapter: GameModeAdapter? = null

@@ -45,18 +45,9 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
 
     override fun setListener() {
         binding?.run {
-            cl4Words.setOnClickListener {
-                stopTitleAnimate()
-                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameModeSelectFragment, Bundle().also { it.putInt("Word", 4) })
-            }
-            cl5Words.setOnClickListener {
-                stopTitleAnimate()
-                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameModeSelectFragment, Bundle().also { it.putInt("Word", 5) })
-            }
-            cl6Words.setOnClickListener {
-                stopTitleAnimate()
-                Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_gameModeSelectFragment, Bundle().also { it.putInt("Word", 6) })
-            }
+            cl4Words.setOnClickListener { switchToSelectedFragment(it, 4) }
+            cl5Words.setOnClickListener { switchToSelectedFragment(it, 5) }
+            cl6Words.setOnClickListener { switchToSelectedFragment(it, 6) }
         }
     }
 
@@ -72,5 +63,10 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
     private fun stopTitleAnimate() {
         timer.purge()
         timer.cancel()
+    }
+
+    private fun switchToSelectedFragment(view: View, word: Int) {
+        stopTitleAnimate()
+        Navigation.findNavController(view).navigate(R.id.action_homePageFragment_to_gameModeSelectFragment, Bundle().also { it.putInt("Word", word) })
     }
 }

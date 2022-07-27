@@ -1,6 +1,9 @@
 package com.example.wordle_1A2B.ui.component.adapter
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +16,7 @@ import com.example.wordle_1A2B.data.dto.GameClass
 import com.example.wordle_1A2B.data.dto.GameMode
 import com.example.wordle_1A2B.data.dto.GameResultStatus
 import com.example.wordle_1A2B.databinding.ItemGameBinding
+import com.example.wordle_1A2B.utils.flop
 
 class GameAdapter(context: Context, private val word: Int, private val gameMode: GameMode, private val list: ArrayList<GameClass.Reply>)
     : ArrayAdapter<GameClass.Reply>(context, 0, list) {
@@ -64,15 +68,17 @@ class GameAdapter(context: Context, private val word: Int, private val gameMode:
 
             if (gameMode == GameMode.Hint || gameMode == GameMode.RepeatAndHint) {
                 for (i in 0 until word) {
-                    holder.clItem.findViewWithTag<TextView>("${i + 1}").also {
-                        it.setBackgroundResource(when (item.result[i]) {
-                            GameResultStatus.Correct -> R.drawable.bg_game_correct
-                            GameResultStatus.PositionError -> R.drawable.bg_game_position_error
-                            else -> R.drawable.bg_game_answer
-                        })
-
-                        it.setTextColor(if (item.result[i] == GameResultStatus.Correct || item.result[i] == GameResultStatus.PositionError)
-                            context.getColor(R.color.white_FFFFFF)else context.getColor(R.color.black_000000)) }
+                    if (position == list.lastIndex) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            holder.clItem.findViewWithTag<TextView>("${i + 1}").also { tv ->
+                                tv.flop(context) {
+                                    setAnswer(tv, item.result[i])
+                                    true
+                                }
+                            }
+                        }, (i * 250).toLong())
+                    } else
+                        setAnswer(holder.clItem.findViewWithTag<TextView>("${i + 1}"), item.result[i])
                 }
             }
         } else holder.gpResult.visibility = View.INVISIBLE
@@ -81,4 +87,14 @@ class GameAdapter(context: Context, private val word: Int, private val gameMode:
     }
 
     fun setListener(l: Listener) { listener = l }
+
+    private fun setAnswer(tv: TextView, item: GameResultStatus) {
+        tv.setBackgroundResource(when (item) {
+            GameResultStatus.Correct -> R.drawable.bg_game_correct
+            GameResultStatus.PositionError -> R.drawable.bg_game_position_error
+            else -> R.drawable.bg_game_answer
+        })
+        tv.setTextColor(if (item == GameResultStatus.Correct || item == GameResultStatus.PositionError)
+            context.getColor(R.color.white_FFFFFF)else context.getColor(R.color.black_000000))
+    }
 }

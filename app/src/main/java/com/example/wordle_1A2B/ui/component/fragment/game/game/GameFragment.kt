@@ -1,6 +1,7 @@
 package com.example.wordle_1A2B.ui.component.fragment.game.game
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -16,6 +17,7 @@ import com.example.wordle_1A2B.ui.component.fragment.game.GameRepository
 import com.example.wordle_1A2B.ui.component.fragment.game.GameViewModel
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
 import com.example.wordle_1A2B.utils.observe
+import com.example.wordle_1A2B.utils.setOnBackPressed
 import com.example.wordle_1A2B.utils.showToast
 
 class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
@@ -75,28 +77,16 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
     }
 
     override fun setListener() {
+        requireActivity().setOnBackPressed(this) { leave() }
+
         binding?.run {
             tvClear.setOnClickListener { viewModel.clearAnswer() }
             tvConfirm.setOnClickListener { viewModel.confirmAnswer() }
             tvBack.setOnClickListener { viewModel.backAnswer() }
             imgLeave.setOnClickListener { leave() }
 
-            tv1.setOnClickListener(viewModel.getClickObject())
-            tv2.setOnClickListener(viewModel.getClickObject())
-            tv3.setOnClickListener(viewModel.getClickObject())
-            tv4.setOnClickListener(viewModel.getClickObject())
-            tv5.setOnClickListener(viewModel.getClickObject())
-            tv6.setOnClickListener(viewModel.getClickObject())
-            tv7.setOnClickListener(viewModel.getClickObject())
-            tv8.setOnClickListener(viewModel.getClickObject())
-            tv9.setOnClickListener(viewModel.getClickObject())
-            tv0.setOnClickListener(viewModel.getClickObject())
+            for (i in 0 .. 9) { clControl.findViewWithTag<TextView>("$i").setOnClickListener(viewModel.getClickObject()) }
         }
-
-
-        requireActivity().onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() { leave() }
-        })
     }
 
     private fun leave() {

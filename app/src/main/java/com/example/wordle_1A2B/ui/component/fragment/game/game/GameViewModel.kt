@@ -1,5 +1,7 @@
 package com.example.wordle_1A2B.ui.component.fragment.game
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -12,6 +14,7 @@ import kotlin.random.Random
 
 class GameViewModel constructor(private val repository: GameRepository): ViewModel() {
     var word: Int = 0
+    var waitingDisplay: Boolean = false
     var gameMode: GameMode = GameMode.No
     var answerList = ArrayList<Int>()
     val isGameWin: Boolean get() = getViewList()[getReplyCount()].result.count { it == GameResultStatus.Correct } == word
@@ -52,6 +55,8 @@ class GameViewModel constructor(private val repository: GameRepository): ViewMod
 
     fun getClickObject(): View.OnClickListener {
         return View.OnClickListener { v ->
+            if (waitingDisplay || isGameWin) return@OnClickListener
+
             v?.let { view ->
                 val number = (view as TextView).text.toString().toInt()
                 when {
@@ -87,6 +92,7 @@ class GameViewModel constructor(private val repository: GameRepository): ViewMod
             setMessage("遊戲已結束")
             return
         }
+        if (waitingDisplay) return
 
         getViewList()[count].answer.let { if (it.size > 0) it.remove(it[it.lastIndex]) }
         viewList.value = getViewList()
@@ -97,6 +103,7 @@ class GameViewModel constructor(private val repository: GameRepository): ViewMod
             setMessage("遊戲已結束")
             return
         }
+        if (waitingDisplay) return
 
         getViewList()[count].answer.clear()
         viewList.value = getViewList()
@@ -107,6 +114,7 @@ class GameViewModel constructor(private val repository: GameRepository): ViewMod
             setMessage("遊戲已結束")
             return
         }
+        if (waitingDisplay) return
 
         val data = getViewList()[getReplyCount()]
         val list = ArrayList<Int>().also { it.addAll(answerList) }
@@ -133,13 +141,24 @@ class GameViewModel constructor(private val repository: GameRepository): ViewMod
             }
         }
 
-        if (getViewList()[getReplyCount()].result.count { it == GameResultStatus.Correct } == word) {
-            viewList.value = getViewList()
-            setMessage("遊戲勝利！")
-            setIsDialogOn(true)
-        } else {
-            setReplyCount(getReplyCount() + 1)
-            addViewList()
+        viewList.value = getViewList()
+        when {
+            isGameWin -> {
+                setMessage("遊戲勝利！")
+                setIsDialogOn(true)
+            }
+            gameMode == GameMode.Hint || gameMode == GameMode.RepeatAndHint -> {
+                waitingDisplay = true
+                Handler(Looper.getMainLooper()).postDelayed({
+                    setReplyCount(getReplyCount() + 1)
+                    addViewList()
+                    waitingDisplay = false
+                }, ((word - 1) * 250 + 500).toLong())
+            }
+            else -> {
+                setReplyCount(getReplyCount() + 1)
+                addViewList()
+            }
         }
     }
 }
