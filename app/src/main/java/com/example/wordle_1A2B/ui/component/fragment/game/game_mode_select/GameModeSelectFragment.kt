@@ -29,9 +29,7 @@ class GameModeSelectFragment: BaseFragment<GameViewModel, FragmentGameModeSelect
         bundle?.let { viewModel.setWordNumber(it.getInt("Word")) }
     }
 
-    override fun observeViewModel() {
-
-    }
+    override fun observeViewModel() {}
 
     override fun init() {
         if (adapter == null) {

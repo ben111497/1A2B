@@ -34,7 +34,7 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
     override fun observeViewModel() {
         observe(viewModel.viewList) {
             if (adapter == null) {
-                adapter = GameAdapter(requireContext(), viewModel.word, viewModel.getViewList())
+                adapter = GameAdapter(requireContext(), viewModel.word, viewModel.gameMode, viewModel.getViewList())
                 binding?.lvGame?.adapter = adapter
             } else {
                 adapter?.notifyDataSetChanged()
@@ -66,7 +66,7 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
         viewModel.setMessage("")
 
         if (adapter == null) {
-            adapter = GameAdapter(requireContext(), viewModel.word, viewModel.getViewList())
+            adapter = GameAdapter(requireContext(), viewModel.word, viewModel.gameMode, viewModel.getViewList())
             binding?.lvGame?.adapter = adapter
         } else {
             adapter?.notifyDataSetChanged()
