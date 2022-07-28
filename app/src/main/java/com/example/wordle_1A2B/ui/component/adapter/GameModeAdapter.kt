@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wordle_1A2B.R
 import com.example.wordle_1A2B.data.dto.GameMode
 import com.example.wordle_1A2B.databinding.ItemGameModeBinding
+import com.example.wordle_1A2B.tools.AsyncImageLoader
 
 class GameModeAdapter (val context: Context, private val list: List<GameMode>): RecyclerView.Adapter<GameModeAdapter.ViewHolder>() {
     private lateinit var listener: Listener
@@ -49,6 +50,17 @@ class GameModeAdapter (val context: Context, private val list: List<GameMode>): 
             GameMode.Hint -> "有提示、數字不重複"
             else -> "有提示、數字可重複"
         }
+
+        val (modePic, color, btnPic) = when (item) {
+            GameMode.No ->  Triple(R.drawable.no, R.color.green_4ECF6A, R.drawable.rp_rectangle_green4ecf6a_40)
+            GameMode.Repeat -> Triple(R.drawable.repeat, R.color.blue_3478FF, R.drawable.rp_rectangle_blue3478ff_40)
+            GameMode.Hint -> Triple(R.drawable.hint, R.color.red_FD4C4C, R.drawable.rp_rectangle_redfd4c4c_40)
+            else -> Triple(R.drawable.hintandrepeatpng, R.color.purple_884EFC, R.drawable.rp_rectangle_purple884efc_40)
+        }
+
+        holder.imgModePicture.setImageResource(modePic)
+        holder.tvModeName.setTextColor(context.getColor(color))
+        holder.tvStart.setBackgroundResource(btnPic)
 
         holder.tvStart.setOnClickListener { listener.onEnterClick(item) }
         holder.clItem.setOnClickListener { listener.onEnterClick(item) }

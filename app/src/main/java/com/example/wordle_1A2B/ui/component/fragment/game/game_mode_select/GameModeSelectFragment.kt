@@ -42,7 +42,7 @@ class GameModeSelectFragment: BaseFragment<GameViewModel, FragmentGameModeSelect
                 }
             })
 
-            binding?.vpMode?.offscreenPageLimit = 1
+            binding?.vpMode?.offscreenPageLimit = 3
             binding?.vpMode?.setPageTransformer(DoubleAddPageTransformer())
             binding?.vpMode?.adapter = adapter
 
@@ -55,7 +55,15 @@ class GameModeSelectFragment: BaseFragment<GameViewModel, FragmentGameModeSelect
 
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    viewModel.gameMode = GameMode.getByValue(position % GameMode.getSize()) ?: return
+                    GameMode.getByValue(position % GameMode.getSize())?.let {
+                        viewModel.gameMode = it
+                        binding?.clBackGround?.setBackgroundResource(when (it) {
+                            GameMode.No -> R.drawable.game_no
+                            GameMode.Repeat -> R.drawable.game_repeat
+                            GameMode.Hint -> R.drawable.game_hint
+                            else -> R.drawable.game_repeat_hint
+                        })
+                    }
                 }
             })
         }

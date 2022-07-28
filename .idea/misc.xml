@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/drawable/rp_clear.xml" value="0.3201754385964912" />
         <entry key="app/src/main/res/drawable/rp_confirm.xml" value="0.3201754385964912" />
         <entry key="app/src/main/res/drawable/rp_line_5b6da3_5.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/drawable/rp_rectangle_blue3478ff_40.xml" value="0.2565789473684211" />
         <entry key="app/src/main/res/drawable/rp_rectangle_d83e3a34_20_right.xml" value="0.3802083333333333" />
         <entry key="app/src/main/res/drawable/rp_rectangle_efefef_line_cccccc.xml" value="0.153125" />
         <entry key="app/src/main/res/drawable/rp_rectangle_f25c5c5c_20.xml" value="0.3802083333333333" />
@@ -30,6 +31,8 @@
         <entry key="app/src/main/res/drawable/rp_rectangle_f2f1b948_20_right.xml" value="0.3802083333333333" />
         <entry key="app/src/main/res/drawable/rp_rectangle_fbfbfb_line_efefef.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/drawable/rp_rectangle_green4ecf6a_40.xml" value="0.2307017543859649" />
+        <entry key="app/src/main/res/drawable/rp_rectangle_purple884efc_40.xml" value="0.2565789473684211" />
+        <entry key="app/src/main/res/drawable/rp_rectangle_redfd4c4c_40.xml" value="0.2565789473684211" />
         <entry key="app/src/main/res/drawable/rp_rectangle_space_bottom_left_15.xml" value="0.2442982456140351" />
         <entry key="app/src/main/res/drawable/rp_rectangle_space_bottom_right_15.xml" value="0.2442982456140351" />
         <entry key="app/src/main/res/drawable/rprp.xml" value="0.2140625" />
