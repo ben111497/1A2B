@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,6 +18,35 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/bg_lottie" />
+
+    <TextView
+        android:id="@+id/tvCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="17.5dp"
+        android:background="@drawable/bg_coin_background"
+        android:paddingStart="36dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="36dp"
+        android:paddingBottom="4dp"
+        android:text="0"
+        android:gravity="center"
+        android:textColor="@color/white_FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/game_coin" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

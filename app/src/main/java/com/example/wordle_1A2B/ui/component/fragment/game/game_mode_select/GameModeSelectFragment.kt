@@ -6,16 +6,15 @@ import androidx.navigation.Navigation
 import androidx.viewpager2.widget.ViewPager2
 import com.example.wordle_1A2B.R
 import com.example.wordle_1A2B.data.dto.GameMode
-import com.example.wordle_1A2B.data.local.LocalData
 import com.example.wordle_1A2B.databinding.FragmentGameModeSelectBinding
 import com.example.wordle_1A2B.tools.DoubleAddPageTransformer
 import com.example.wordle_1A2B.ui.base.BaseFragment
 import com.example.wordle_1A2B.ui.component.adapter.GameModeAdapter
-import com.example.wordle_1A2B.ui.component.fragment.game.GameRepository
-import com.example.wordle_1A2B.ui.component.fragment.game.GameViewModel
+import com.example.wordle_1A2B.ui.component.fragment.game.game.GameViewModel
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
-import com.example.wordle_1A2B.utils.setOnBackPressed
+import kotlinx.coroutines.DelicateCoroutinesApi
 
+@DelicateCoroutinesApi
 class GameModeSelectFragment: BaseFragment<GameViewModel, FragmentGameModeSelectBinding>() {
     private var adapter: GameModeAdapter? = null
     override fun initViewBinding() {
@@ -23,7 +22,7 @@ class GameModeSelectFragment: BaseFragment<GameViewModel, FragmentGameModeSelect
     }
 
     override fun initViewModel() {
-        requireActivity().let { viewModel = ViewModelProviders.of(it, BaseModelFactory(GameRepository(LocalData(it))))[GameViewModel::class.java] }
+        requireActivity().let { viewModel = ViewModelProviders.of(it, BaseModelFactory(it))[GameViewModel::class.java] }
     }
 
     override fun argument(bundle: Bundle?) {

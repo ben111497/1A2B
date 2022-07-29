@@ -6,21 +6,22 @@ import android.view.animation.AnimationUtils
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.wordle_1A2B.R
-import com.example.wordle_1A2B.data.local.LocalData
 import com.example.wordle_1A2B.databinding.FragmentHomepageBinding
 import com.example.wordle_1A2B.ui.base.BaseFragment
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
 import com.example.wordle_1A2B.utils.observe
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
+@DelicateCoroutinesApi
 class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>() {
     private lateinit var timer: Timer
 
     override fun initViewModel() {
-        viewModel = ViewModelProviders.of(requireActivity(), BaseModelFactory(HomepageRepository(LocalData(requireContext()))))[HomepageViewModel::class.java]
+        viewModel = ViewModelProviders.of(requireActivity(), BaseModelFactory(requireActivity()))[HomepageViewModel::class.java]
     }
 
     override fun initViewBinding() {
@@ -37,10 +38,15 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
                 viewModel.getViewList()[it].startAnimation(anim)
             }
         }
+
+        observe(viewModel.coin) {
+            binding?.tvCoin?.text = "$it"
+        }
     }
 
     override fun init() {
         startTitleAnimate()
+        viewModel.getLocalCoin()
     }
 
     override fun setListener() {
@@ -48,6 +54,7 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
             cl4Words.setOnClickListener { switchToSelectedFragment(it, 4) }
             cl5Words.setOnClickListener { switchToSelectedFragment(it, 5) }
             cl6Words.setOnClickListener { switchToSelectedFragment(it, 6) }
+            tvCoin.setOnClickListener { viewModel.setCoin("", viewModel.getCoin() + 10) }
         }
     }
 

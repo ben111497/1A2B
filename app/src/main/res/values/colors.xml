@@ -47,6 +47,7 @@
     <!--  Black  -->
     <color name="black_000000">#000000</color>
     <color name="black_D8000000">#D8000000</color>
+    <color name="black_99000000">#99000000</color>
     <color name="black_333333">#333333</color>
     <color name="black_2B2B2B">#2B2B2B</color>
     <color name="black_464646">#464646</color>

@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.room.*
 
 const val Table_API = "API"
-const val DB_Version = 2
+const val Table_Coin = "Coin"
+const val DB_Version = 3
 
-@Database(entities = [API::class], version = DB_Version)
+@Database(entities = [API::class, Coin::class], version = DB_Version)
 @TypeConverters(Converters::class)
 abstract class DataBase: RoomDatabase() {
     companion object {
@@ -21,7 +22,11 @@ abstract class DataBase: RoomDatabase() {
     }
 
     abstract fun getAPIDao(): APIDao
+    abstract fun getCoinDao(): CoinDao
 }
 
-@Entity(tableName = Table_API, primaryKeys = ["name", "page"])
-data class API (var name: String, var page: Int, var json: String)
+@Entity(tableName = Table_API, primaryKeys = ["name"])
+data class API (var name: String, var json: String)
+
+@Entity(tableName = Table_Coin, primaryKeys = ["userID"])
+data class Coin (var userID: String, var coin: Int)

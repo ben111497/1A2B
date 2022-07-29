@@ -3,51 +3,48 @@ package com.example.wordle_1A2B.data.local
 import android.content.Context
 import android.util.Log
 import com.example.wordle_1A2B.data.local.database.API
+import com.example.wordle_1A2B.data.local.database.Coin
 import com.example.wordle_1A2B.data.local.database.DataBase
 import com.google.gson.Gson
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import java.lang.Exception
 import javax.inject.Inject
 
+@DelicateCoroutinesApi
 open class LocalData constructor(private val context: Context) {
     private val dataBase: DataBase get() { return DataBase.instance(context) }
 
-    /**
-     * local
-     */
-
-    interface Local {
-        fun <T> onGetLocalData(data: T)
-    }
-
-    fun getLocalAPIByName(resOfT: Class<*>, page: Int = 1, listener: Local) {
-        runBlocking {
-            var data: API? = null
-            val job = GlobalScope.launch(Dispatchers.IO) {
-                try {
-                    data = dataBase.getAPIDao().getByNamePage(resOfT.simpleName, page) ?: kotlin.run {
-                        Log.e("Local not find: ${resOfT.simpleName}", resOfT.simpleName)
-                        return@launch
-                    }
-                } catch (e: Exception) {
-                    Log.e("Local get failed: ${resOfT.simpleName}", e.message ?: "")
-                }
-            }
-
-            job.join()
-
-            data?.let {
-                val json = Gson().fromJson(it.json, resOfT)
-                Log.e("Local: ${resOfT.simpleName}", json.toString())
-                listener.onGetLocalData(json)
-            }
+    fun getAPIByName(resOfT: Class<*>): Flow<API> {
+        return try {
+            dataBase.getAPIDao().getByNamePage(resOfT.simpleName) ?: throw IllegalArgumentException("UnFind")
+        } catch (e: Exception) {
+            throw IllegalArgumentException("UnFind")
         }
     }
 
-    fun saveAPIByName(resOfT: Class<*>, page: Int = 1, json: String) {
+    fun saveAPIByName(resOfT: Class<*>, json: String) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                dataBase.getAPIDao().insert(API(resOfT.simpleName, page, json))
+                dataBase.getAPIDao().insert(API(resOfT.simpleName, json))
+            } catch (e: Exception) { }
+        }
+    }
+
+    fun getCoin(): Flow<Coin?> {
+        return try {
+            dataBase.getCoinDao().getByUserID("")
+        } catch (e: Exception) {
+            setCoin("", 0)
+            throw IllegalArgumentException("UnFind")
+        }
+    }
+
+    fun setCoin(userID: String = "", coin: Int) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                dataBase.getCoinDao().insert(Coin(userID, coin))
             } catch (e: Exception) { }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.wordle_1A2B.ui.component.fragment.game
+package com.example.wordle_1A2B.ui.component.fragment.game.game
 
 import android.os.Handler
 import android.os.Looper
@@ -10,9 +10,16 @@ import androidx.lifecycle.ViewModel
 import com.example.wordle_1A2B.data.dto.GameClass
 import com.example.wordle_1A2B.data.dto.GameMode
 import com.example.wordle_1A2B.data.dto.GameResultStatus
+import com.example.wordle_1A2B.data.local.LocalData
+import com.google.gson.Gson
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
-class GameViewModel constructor(private val repository: GameRepository): ViewModel() {
+@DelicateCoroutinesApi
+class GameViewModel constructor(private val local: LocalData): ViewModel() {
     var word: Int = 0
     var waitingDisplay: Boolean = false
     var gameMode: GameMode = GameMode.No
@@ -23,6 +30,7 @@ class GameViewModel constructor(private val repository: GameRepository): ViewMod
     val replyCount = MutableLiveData<Int>().also { it.value = 0 }
     val message = MutableLiveData<String>().also { it.value = "" }
     val isDialogOn = MutableLiveData<Boolean>().also { it.value = false }
+    val coin = MutableLiveData<Int>().also { it.value = 0 }
 
     /**
      * Control Data
@@ -48,6 +56,26 @@ class GameViewModel constructor(private val repository: GameRepository): ViewMod
     
     fun setIsDialogOn(isOn: Boolean) = isOn.also { isDialogOn.value = it }
     fun getIsDialogOn() = isDialogOn.value!!
+
+    /**
+     * Local & Api
+     */
+
+    suspend fun getLocalDataByNam(resOfT: Class<*>) {
+        local.getAPIByName(resOfT).collect {
+            val json = Gson().fromJson(it.json, resOfT)
+            Log.e("Local: ${resOfT.simpleName}", json.toString())
+
+            //when (resOfT) { }
+        }
+    }
+
+    fun setLocalCoin(userID: String, coin: Int) = local.setCoin(userID, coin)
+    fun getLocalCoin() {
+        GlobalScope.launch(Dispatchers.IO) {
+            local.getCoin().collect { coin.value = it?.coin ?: 0 }
+        }
+    }
 
     /**
      * Other Function

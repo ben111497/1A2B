@@ -2,7 +2,6 @@ package com.example.wordle_1A2B.ui.component.fragment.game.game
 
 import android.os.Bundle
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -13,8 +12,6 @@ import com.example.wordle_1A2B.ui.base.BaseFragment
 import com.example.wordle_1A2B.ui.component.adapter.GameAdapter
 import com.example.wordle_1A2B.ui.component.dialog.game.GameDialog
 import com.example.wordle_1A2B.ui.component.dialog.show_message.ShowMessageDialog
-import com.example.wordle_1A2B.ui.component.fragment.game.GameRepository
-import com.example.wordle_1A2B.ui.component.fragment.game.GameViewModel
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
 import com.example.wordle_1A2B.utils.observe
 import com.example.wordle_1A2B.utils.setOnBackPressed
@@ -24,7 +21,7 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
     private var adapter: GameAdapter? = null
 
     override fun initViewModel() {
-        requireActivity().let { viewModel = ViewModelProviders.of(it, BaseModelFactory(GameRepository(LocalData(it))))[GameViewModel::class.java] }
+        requireActivity().let { viewModel = ViewModelProviders.of(it, BaseModelFactory(it))[GameViewModel::class.java] }
     }
 
     override fun initViewBinding() {
