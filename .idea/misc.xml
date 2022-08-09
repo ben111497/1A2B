@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/drawable/bg_rectangle_yellowfff7db_15.xml" value="0.2307017543859649" />
         <entry key="app/src/main/res/drawable/bg_rectengle_white_15_alpha_95.xml" value="0.2442982456140351" />
         <entry key="app/src/main/res/drawable/bg_white_line_gray_5.xml" value="0.2442982456140351" />
+        <entry key="app/src/main/res/drawable/button_choose.xml" value="0.2026315789473684" />
         <entry key="app/src/main/res/drawable/circle_top_10.xml" value="0.3802083333333333" />
         <entry key="app/src/main/res/drawable/list_background.xml" value="0.21979166666666666" />
         <entry key="app/src/main/res/drawable/list_picture.xml" value="0.3802083333333333" />
@@ -49,7 +50,7 @@
         <entry key="app/src/main/res/layout/fragment_game.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_game_mode_select.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_homepage.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_homepage.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_game.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_game_mode.xml" value="0.21710526315789475" />
         <entry key="app/src/main/res/layout/item_list.xml" value="0.7377201112140871" />

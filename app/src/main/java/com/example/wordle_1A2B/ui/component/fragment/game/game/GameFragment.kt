@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.wordle_1A2B.R
-import com.example.wordle_1A2B.data.local.LocalData
 import com.example.wordle_1A2B.databinding.FragmentGameBinding
 import com.example.wordle_1A2B.ui.base.BaseFragment
 import com.example.wordle_1A2B.ui.component.adapter.GameAdapter
@@ -16,7 +15,9 @@ import com.example.wordle_1A2B.ui.factory.BaseModelFactory
 import com.example.wordle_1A2B.utils.observe
 import com.example.wordle_1A2B.utils.setOnBackPressed
 import com.example.wordle_1A2B.utils.showToast
+import kotlinx.coroutines.DelicateCoroutinesApi
 
+@DelicateCoroutinesApi
 class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
     private var adapter: GameAdapter? = null
 

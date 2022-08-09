@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wordle_1A2B.R
-import com.example.wordle_1A2B.api.AttractionsClassRes
+import com.example.wordle_1A2B.data.dto.AttractionsClassRes
 import com.example.wordle_1A2B.databinding.ItemPictureBigBinding
 import com.example.wordle_1A2B.tools.AsyncImageLoader
 

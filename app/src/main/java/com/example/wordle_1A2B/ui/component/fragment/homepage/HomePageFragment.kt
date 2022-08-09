@@ -54,7 +54,7 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
             cl4Words.setOnClickListener { switchToSelectedFragment(it, 4) }
             cl5Words.setOnClickListener { switchToSelectedFragment(it, 5) }
             cl6Words.setOnClickListener { switchToSelectedFragment(it, 6) }
-            tvCoin.setOnClickListener { viewModel.setCoin("", viewModel.getCoin() + 10) }
+            //tvCoin.setOnClickListener { viewModel.setCoin("", viewModel.getCoin() + 10) }
         }
     }
 
@@ -68,6 +68,7 @@ class HomePageFragment: BaseFragment<HomepageViewModel, FragmentHomepageBinding>
     }
 
     private fun stopTitleAnimate() {
+        viewModel.setCount(0)
         timer.purge()
         timer.cancel()
     }

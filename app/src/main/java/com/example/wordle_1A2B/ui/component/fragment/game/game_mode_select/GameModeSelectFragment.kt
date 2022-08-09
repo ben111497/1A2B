@@ -12,6 +12,7 @@ import com.example.wordle_1A2B.ui.base.BaseFragment
 import com.example.wordle_1A2B.ui.component.adapter.GameModeAdapter
 import com.example.wordle_1A2B.ui.component.fragment.game.game.GameViewModel
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
+import com.example.wordle_1A2B.utils.observe
 import kotlinx.coroutines.DelicateCoroutinesApi
 
 @DelicateCoroutinesApi
@@ -29,9 +30,15 @@ class GameModeSelectFragment: BaseFragment<GameViewModel, FragmentGameModeSelect
         bundle?.let { viewModel.setWordNumber(it.getInt("Word")) }
     }
 
-    override fun observeViewModel() {}
+    override fun observeViewModel() {
+        observe(viewModel.coin) {
+            binding?.tvCoin?.text = "$it"
+        }
+    }
 
     override fun init() {
+        viewModel.getLocalCoin()
+
         if (adapter == null) {
             adapter = GameModeAdapter(requireContext(), arrayListOf<GameMode>(GameMode.No, GameMode.Repeat, GameMode.Hint, GameMode.RepeatAndHint))
             adapter?.setListener(object: GameModeAdapter.Listener {

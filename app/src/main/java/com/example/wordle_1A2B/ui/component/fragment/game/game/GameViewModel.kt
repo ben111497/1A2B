@@ -12,10 +12,8 @@ import com.example.wordle_1A2B.data.dto.GameMode
 import com.example.wordle_1A2B.data.dto.GameResultStatus
 import com.example.wordle_1A2B.data.local.LocalData
 import com.google.gson.Gson
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.flowOn
 import kotlin.random.Random
 
 @DelicateCoroutinesApi
@@ -72,8 +70,8 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
 
     fun setLocalCoin(userID: String, coin: Int) = local.setCoin(userID, coin)
     fun getLocalCoin() {
-        GlobalScope.launch(Dispatchers.IO) {
-            local.getCoin().collect { coin.value = it?.coin ?: 0 }
+        GlobalScope.launch(Dispatchers.Main) {
+            local.getCoin().flowOn(Dispatchers.IO).collect { coin.value = it?.coin }
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.wordle_1A2B.api
+package com.example.wordle_1A2B.data.dto
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
