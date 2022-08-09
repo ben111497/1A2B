@@ -92,9 +92,10 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
             Navigation.findNavController(binding?.root ?: return).navigate(R.id.action_gameFragment_to_homePageFragment)
         } else {
             ShowMessageDialog<ViewModel> {
-                it.setTitle("遊戲尚未結束，是否要離開？")
+                it.setTitle("遊戲尚未結束，是否要離開？\n離開將會扣除50金幣")
                 it.setListener(object: ShowMessageDialog.Listener {
                     override fun onOk() {
+                        viewModel.setLeaveCoin()
                         it.dismiss()
                         Navigation.findNavController(binding?.root ?: return).navigate(R.id.action_gameFragment_to_homePageFragment)
                     }

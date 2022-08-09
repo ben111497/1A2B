@@ -55,6 +55,8 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
     fun setIsDialogOn(isOn: Boolean) = isOn.also { isDialogOn.value = it }
     fun getIsDialogOn() = isDialogOn.value!!
 
+    fun getCoin() = coin.value ?: 0
+
     /**
      * Local & Api
      */
@@ -170,6 +172,7 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
         viewList.value = getViewList()
         when {
             isGameWin -> {
+                setWinCoin()
                 setMessage("遊戲勝利！")
                 setIsDialogOn(true)
             }
@@ -186,5 +189,28 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
                 addViewList()
             }
         }
+    }
+
+    fun setWinCoin() {
+        val power: Double = when (word) {
+            4 -> 1.0
+            5 -> 1.25
+            else -> 1.5
+        }
+
+        val score = when (gameMode) {
+            GameMode.Repeat -> 200 * power - 20 * power * getReplyCount() / (word + 1)
+            GameMode.No -> 150 * power- 15 * power * getReplyCount() / (word + 1)
+            GameMode.Hint -> 100 * power - 10 * power * getReplyCount() / (word + 1)
+            else -> 50 * power - 5 * power * getReplyCount() / (word + 1)
+        }.toInt().takeIf { it > 0 } ?: 0
+
+        local.setCoin("", getCoin() + score)
+        Log.e("coin get", "${getCoin() + score}")
+    }
+
+    fun setLeaveCoin() {
+        local.setCoin("", (getCoin() - 50).takeIf { it > 0 } ?: 0)
+        Log.e("coin loss", "${(getCoin() - 50).takeIf { it > 0 } ?: 0}")
     }
 }
