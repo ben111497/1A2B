@@ -9,7 +9,7 @@ import com.example.wordle_1A2B.R
 import com.example.wordle_1A2B.databinding.FragmentHomepageBinding
 import com.example.wordle_1A2B.ui.base.BaseFragment
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
-import com.example.wordle_1A2B.utils.observe
+import com.example.wordle_1A2B.helper.observe
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

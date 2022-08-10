@@ -1,4 +1,4 @@
-package com.example.wordle_1A2B.utils
+package com.example.wordle_1A2B.helper
 
 import android.content.Context
 import android.view.View

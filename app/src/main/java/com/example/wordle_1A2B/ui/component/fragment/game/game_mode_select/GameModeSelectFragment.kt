@@ -12,7 +12,7 @@ import com.example.wordle_1A2B.ui.base.BaseFragment
 import com.example.wordle_1A2B.ui.component.adapter.GameModeAdapter
 import com.example.wordle_1A2B.ui.component.fragment.game.game.GameViewModel
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
-import com.example.wordle_1A2B.utils.observe
+import com.example.wordle_1A2B.helper.observe
 import kotlinx.coroutines.DelicateCoroutinesApi
 
 @DelicateCoroutinesApi
@@ -38,6 +38,7 @@ class GameModeSelectFragment: BaseFragment<GameViewModel, FragmentGameModeSelect
 
     override fun init() {
         viewModel.getLocalCoin()
+        //binding?.tvCoin?.text = "${viewModel.coin}"
 
         if (adapter == null) {
             adapter = GameModeAdapter(requireContext(), arrayListOf<GameMode>(GameMode.No, GameMode.Repeat, GameMode.Hint, GameMode.RepeatAndHint))
@@ -48,7 +49,7 @@ class GameModeSelectFragment: BaseFragment<GameViewModel, FragmentGameModeSelect
                 }
             })
 
-            binding?.vpMode?.offscreenPageLimit = 3
+            binding?.vpMode?.offscreenPageLimit = 1
             binding?.vpMode?.setPageTransformer(DoubleAddPageTransformer())
             binding?.vpMode?.adapter = adapter
 

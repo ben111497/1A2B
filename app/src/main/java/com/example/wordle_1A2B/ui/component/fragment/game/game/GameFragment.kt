@@ -10,11 +10,12 @@ import com.example.wordle_1A2B.databinding.FragmentGameBinding
 import com.example.wordle_1A2B.ui.base.BaseFragment
 import com.example.wordle_1A2B.ui.component.adapter.GameAdapter
 import com.example.wordle_1A2B.ui.component.dialog.game.GameDialog
+import com.example.wordle_1A2B.ui.component.dialog.game.GameHintDialog
 import com.example.wordle_1A2B.ui.component.dialog.show_message.ShowMessageDialog
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
-import com.example.wordle_1A2B.utils.observe
-import com.example.wordle_1A2B.utils.setOnBackPressed
-import com.example.wordle_1A2B.utils.showToast
+import com.example.wordle_1A2B.helper.observe
+import com.example.wordle_1A2B.helper.setOnBackPressed
+import com.example.wordle_1A2B.helper.showToast
 import kotlinx.coroutines.DelicateCoroutinesApi
 
 @DelicateCoroutinesApi
@@ -59,11 +60,7 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
     }
 
     override fun init() {
-        viewModel.initViewList()
-        viewModel.setReplyCount(0)
-        viewModel.setAnswer()
-        viewModel.setIsDialogOn(false)
-        viewModel.setMessage("")
+        viewModel.initViewModelData()
 
         if (adapter == null) {
             adapter = GameAdapter(requireContext(), viewModel.word, viewModel.gameMode, viewModel.getViewList())
@@ -82,6 +79,7 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
             tvConfirm.setOnClickListener { viewModel.confirmAnswer() }
             tvBack.setOnClickListener { viewModel.backAnswer() }
             imgLeave.setOnClickListener { leave() }
+            imgHint.setOnClickListener { GameHintDialog().show(requireActivity().supportFragmentManager, "yo") }
 
             for (i in 0 .. 9) { clControl.findViewWithTag<TextView>("$i").setOnClickListener(viewModel.getClickObject()) }
         }
@@ -95,7 +93,7 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
                 it.setTitle("遊戲尚未結束，是否要離開？\n離開將會扣除50金幣")
                 it.setListener(object: ShowMessageDialog.Listener {
                     override fun onOk() {
-                        viewModel.setLeaveCoin()
+                        viewModel.setReduceCoin(50)
                         it.dismiss()
                         Navigation.findNavController(binding?.root ?: return).navigate(R.id.action_gameFragment_to_homePageFragment)
                     }

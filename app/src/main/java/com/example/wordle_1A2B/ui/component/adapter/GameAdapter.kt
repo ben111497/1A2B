@@ -3,7 +3,6 @@ package com.example.wordle_1A2B.ui.component.adapter
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,7 @@ import com.example.wordle_1A2B.data.dto.GameClass
 import com.example.wordle_1A2B.data.dto.GameMode
 import com.example.wordle_1A2B.data.dto.GameResultStatus
 import com.example.wordle_1A2B.databinding.ItemGameBinding
-import com.example.wordle_1A2B.utils.flop
+import com.example.wordle_1A2B.helper.flop
 
 class GameAdapter(context: Context, private val word: Int, private val gameMode: GameMode, private val list: ArrayList<GameClass.Reply>)
     : ArrayAdapter<GameClass.Reply>(context, 0, list) {
@@ -95,6 +94,6 @@ class GameAdapter(context: Context, private val word: Int, private val gameMode:
             else -> R.drawable.bg_game_answer
         })
         tv.setTextColor(if (item == GameResultStatus.Correct || item == GameResultStatus.PositionError)
-            context.getColor(R.color.white_FFFFFF)else context.getColor(R.color.black_000000))
+            context.getColor(R.color.white_FFFFFF) else context.getColor(R.color.black_000000))
     }
 }

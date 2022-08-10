@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.viewbinding.ViewBinding
 
 
-abstract class BaseFragment<ViewModel: androidx.lifecycle.ViewModel, binding: ViewBinding>: Fragment() {
+abstract class BaseFragment<ViewModel: androidx.lifecycle.ViewModel, binding: ViewBinding>: Fragment(), LifecycleOwner {
     lateinit var viewModel: ViewModel
     var binding: binding? = null
 

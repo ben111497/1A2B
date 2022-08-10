@@ -1,10 +1,10 @@
 package com.example.wordle_1A2B.ui.component.fragment.homepage
 
 import android.view.View
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.wordle_1A2B.data.dto.SingleLiveData
 import com.example.wordle_1A2B.data.local.LocalData
-import com.example.wordle_1A2B.utils.addAll
+import com.example.wordle_1A2B.helper.addAll
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -13,9 +13,9 @@ import kotlinx.coroutines.launch
 
 @DelicateCoroutinesApi
 class HomepageViewModel constructor(private val local: LocalData): ViewModel() {
-    val timerCount = MutableLiveData<Int>().also { it.value = 0 }
-    val viewList = MutableLiveData<ArrayList<View>>().also { it.value = ArrayList<View>() }
-    val coin = MutableLiveData<Int>().also { it.value = 0 }
+    val timerCount = SingleLiveData<Int>().also { it.value = 0 }
+    val viewList = SingleLiveData<ArrayList<View>>().also { it.value = ArrayList<View>() }
+    val coin = SingleLiveData<Int>().also { it.value = 0 }
 
     fun getTimerCountValue() = timerCount.value!!
     fun setCount(value: Int) { timerCount.value = value }

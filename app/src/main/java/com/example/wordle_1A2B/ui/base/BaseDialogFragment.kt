@@ -8,7 +8,7 @@ import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
 import com.example.wordle_1A2B.R
-import com.example.wordle_1A2B.utils.getScreenWidthPixel
+import com.example.wordle_1A2B.helper.getScreenWidthPixel
 
 abstract class BaseDialogFragment<ViewModel: androidx.lifecycle.ViewModel, binding: ViewBinding>
 constructor(private val widthPercent: Double = -1.0, private val heightPercent: Double = -1.0): DialogFragment() {

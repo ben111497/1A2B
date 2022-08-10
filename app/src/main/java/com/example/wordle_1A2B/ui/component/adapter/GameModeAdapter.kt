@@ -55,7 +55,7 @@ class GameModeAdapter (val context: Context, private val list: List<GameMode>): 
             GameMode.No ->  Triple(R.drawable.no, R.color.green_4ECF6A, R.drawable.rp_rectangle_green4ecf6a_40)
             GameMode.Repeat -> Triple(R.drawable.repeat, R.color.blue_3478FF, R.drawable.rp_rectangle_blue3478ff_40)
             GameMode.Hint -> Triple(R.drawable.hint, R.color.red_FD4C4C, R.drawable.rp_rectangle_redfd4c4c_40)
-            else -> Triple(R.drawable.hintandrepeatpng, R.color.purple_884EFC, R.drawable.rp_rectangle_purple884efc_40)
+            else -> Triple(R.drawable.hintandrepeat, R.color.purple_884EFC, R.drawable.rp_rectangle_purple884efc_40)
         }
 
         holder.imgModePicture.setImageResource(modePic)

@@ -5,12 +5,13 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.wordle_1A2B.data.dto.GameClass
 import com.example.wordle_1A2B.data.dto.GameMode
 import com.example.wordle_1A2B.data.dto.GameResultStatus
+import com.example.wordle_1A2B.data.dto.SingleLiveData
 import com.example.wordle_1A2B.data.local.LocalData
+import com.example.wordle_1A2B.helper.add
 import com.google.gson.Gson
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flowOn
@@ -24,11 +25,14 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
     var answerList = ArrayList<Int>()
     val isGameWin: Boolean get() = getViewList()[getReplyCount()].result.count { it == GameResultStatus.Correct } == word
 
-    val viewList = MutableLiveData<ArrayList<GameClass.Reply>>().also { it.value = ArrayList() }
-    val replyCount = MutableLiveData<Int>().also { it.value = 0 }
-    val message = MutableLiveData<String>().also { it.value = "" }
-    val isDialogOn = MutableLiveData<Boolean>().also { it.value = false }
-    val coin = MutableLiveData<Int>().also { it.value = 0 }
+    val viewList = SingleLiveData<ArrayList<GameClass.Reply>>().also { it.value = ArrayList() }
+    val replyCount = SingleLiveData<Int>().also { it.value = 0 }
+    val message = SingleLiveData<String>().also { it.value = "" }
+    val isDialogOn = SingleLiveData<Boolean>().also { it.value = false }
+    val coin = SingleLiveData<Int>().also { it.value = 0 }
+    val hintList = SingleLiveData<ArrayList<Hint>>().also { it.value = ArrayList<Hint>() }
+
+    class Hint(val position: Int, val answer: Int)
 
     /**
      * Control Data
@@ -56,6 +60,19 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
     fun getIsDialogOn() = isDialogOn.value!!
 
     fun getCoin() = coin.value ?: 0
+    fun addCoin(coin: Int) {
+        val currentCoin = (getCoin() + coin).takeIf { it > 0 } ?: 0
+        this.coin.value = currentCoin
+        local.setCoin("", currentCoin)
+    }
+    fun setReduceCoin(coin: Int) {
+        val currentCoin = (getCoin() - coin).takeIf { it > 0 } ?: 0
+        this.coin.value = currentCoin
+        local.setCoin("", currentCoin)
+    }
+
+    fun initHintList() = hintList.value?.clear()
+    fun getHintList() = hintList.value!!
 
     /**
      * Local & Api
@@ -80,6 +97,15 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
     /**
      * Other Function
      */
+
+    fun initViewModelData() {
+        initViewList()
+        setReplyCount(0)
+        setAnswer()
+        setIsDialogOn(false)
+        setMessage("")
+        initHintList()
+    }
 
     fun getClickObject(): View.OnClickListener {
         return View.OnClickListener { v ->
@@ -191,7 +217,12 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
         }
     }
 
-    fun setWinCoin() {
+    fun useHint(position: Int) {
+        val hint = answerList[position]
+        hintList.add(Hint(position, hint))
+    }
+
+    private fun setWinCoin() {
         val power: Double = when (word) {
             4 -> 1.0
             5 -> 1.25
@@ -205,12 +236,6 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
             else -> 50 * power - 5 * power * getReplyCount() / (word + 1)
         }.toInt().takeIf { it > 0 } ?: 0
 
-        local.setCoin("", getCoin() + score)
-        Log.e("coin get", "${getCoin() + score}")
-    }
-
-    fun setLeaveCoin() {
-        local.setCoin("", (getCoin() - 50).takeIf { it > 0 } ?: 0)
-        Log.e("coin loss", "${(getCoin() - 50).takeIf { it > 0 } ?: 0}")
+        addCoin(score)
     }
 }

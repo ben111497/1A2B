@@ -1,13 +1,11 @@
-package com.example.wordle_1A2B.utils
+package com.example.wordle_1A2B.helper
 
 import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.util.DisplayMetrics
-import android.view.View
 import android.view.WindowInsets
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 
 private var toast: Toast? = null
 fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {

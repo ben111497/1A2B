@@ -52,6 +52,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <ImageView
+            android:id="@+id/imgHint"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvStep"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/idea" />
+
         <TextView
             android:id="@+id/tvStep"
             android:layout_width="wrap_content"
