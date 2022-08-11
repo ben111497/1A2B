@@ -2,6 +2,7 @@ package com.example.wordle_1A2B.ui.component.fragment.game.game
 
 import android.os.Bundle
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -87,7 +88,7 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
 
     private fun leave() {
         if (viewModel.isGameWin) {
-            Navigation.findNavController(binding?.root ?: return).navigate(R.id.action_gameFragment_to_homePageFragment)
+            Navigation.findNavController(binding?.root ?: return).popBackStack(R.id.homePageFragment, false)
         } else {
             ShowMessageDialog<ViewModel> {
                 it.setTitle("遊戲尚未結束，是否要離開？\n離開將會扣除50金幣")
@@ -95,7 +96,7 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
                     override fun onOk() {
                         viewModel.setReduceCoin(50)
                         it.dismiss()
-                        Navigation.findNavController(binding?.root ?: return).navigate(R.id.action_gameFragment_to_homePageFragment)
+                        Navigation.findNavController(binding?.root ?: return).popBackStack(R.id.homePageFragment, false)
                     }
                 })
             }.show(requireActivity().supportFragmentManager, "message")

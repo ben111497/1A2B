@@ -217,6 +217,8 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
         }
     }
 
+    fun isCoinEnough(coin: Int) = getCoin() >= coin
+
     fun useHint(position: Int) {
         val hint = answerList[position]
         hintList.add(Hint(position, hint))

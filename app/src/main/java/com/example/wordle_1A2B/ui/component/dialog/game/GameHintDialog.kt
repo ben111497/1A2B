@@ -13,6 +13,7 @@ import com.example.wordle_1A2B.ui.component.fragment.game.game.GameViewModel
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
 import com.example.wordle_1A2B.helper.flop
 import com.example.wordle_1A2B.helper.observe
+import com.example.wordle_1A2B.helper.showToast
 import kotlinx.coroutines.DelicateCoroutinesApi
 
 @DelicateCoroutinesApi
@@ -74,9 +75,11 @@ class GameHintDialog: BaseDialogFragment<GameViewModel, DialogGameHintBinding>(0
             it.setTitle("使用提示將扣除50金幣\n確定要使用？")
             it.setListener(object: ShowMessageDialog.Listener {
                 override fun onOk() {
-                    viewModel.useHint(position - 1)
-                    viewModel.setReduceCoin(50)
-                    it.dismiss()
+                    if (viewModel.isCoinEnough(50)) {
+                        viewModel.useHint(position - 1)
+                        viewModel.setReduceCoin(50)
+                        it.dismiss()
+                    } else requireActivity().showToast("金幣不足！")
                 }
             })
         }.show(requireActivity().supportFragmentManager, "hint")

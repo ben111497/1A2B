@@ -42,7 +42,7 @@
         <entry key="app/src/main/res/drawable/rprp.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/aaa.xml" value="0.75" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/dialog_game_hint.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/dialog_game_hint.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_game_mode_select.xml" value="0.21710526315789475" />
         <entry key="app/src/main/res/layout/dialog_game_victory.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_message.xml" value="0.5" />
