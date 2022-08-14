@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.wordle_1A2B.databinding.DialogGameVictoryBinding
 import com.example.wordle_1A2B.ui.base.BaseDialogFragment
 
-class GameDialog: BaseDialogFragment<ViewModel, DialogGameVictoryBinding>(0.75) {
+class GameDialog(val coin: Int): BaseDialogFragment<ViewModel, DialogGameVictoryBinding>(0.75) {
     private lateinit var listener: Listener
 
     interface Listener {
@@ -34,7 +34,9 @@ class GameDialog: BaseDialogFragment<ViewModel, DialogGameVictoryBinding>(0.75) 
         }
     }
 
-    override fun init() {}
+    override fun init() {
+        binding?.tvCoin?.text = "獲得 $coin 金幣"
+    }
 
     fun setListener(l: Listener) { listener = l }
 }

@@ -2,7 +2,6 @@ package com.example.wordle_1A2B.ui.component.fragment.game.game
 
 import android.os.Bundle
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -46,11 +45,11 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
 
         observe(viewModel.isDialogOn) {
             if (it) {
-                GameDialog().also { it.setListener(object: GameDialog.Listener{
+                GameDialog(viewModel.winCoin).also { it.setListener(object: GameDialog.Listener{
                     override fun onOk() {}
 
                     override fun onLeave() {
-                        Navigation.findNavController(binding?.root ?: return).popBackStack()
+                        Navigation.findNavController(binding?.root ?: return).popBackStack(R.id.homePageFragment, false)
                     }
                 }) }.show(requireActivity().supportFragmentManager, "hi")
             }

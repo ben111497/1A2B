@@ -20,6 +20,7 @@ import kotlin.random.Random
 @DelicateCoroutinesApi
 class GameViewModel constructor(private val local: LocalData): ViewModel() {
     var word: Int = 0
+    var winCoin: Int = 0
     var waitingDisplay: Boolean = false
     var gameMode: GameMode = GameMode.No
     var answerList = ArrayList<Int>()
@@ -105,6 +106,7 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
         setIsDialogOn(false)
         setMessage("")
         initHintList()
+        winCoin = 0
     }
 
     fun getClickObject(): View.OnClickListener {
@@ -232,12 +234,13 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
         }
 
         val score = when (gameMode) {
-            GameMode.Repeat -> 200 * power - 20 * power * getReplyCount() / (word + 1)
-            GameMode.No -> 150 * power- 15 * power * getReplyCount() / (word + 1)
-            GameMode.Hint -> 100 * power - 10 * power * getReplyCount() / (word + 1)
-            else -> 50 * power - 5 * power * getReplyCount() / (word + 1)
+            GameMode.Repeat -> 200 * power - 20 * power * (getReplyCount() / (word + 1))
+            GameMode.No -> 150 * power- 15 * power * (getReplyCount() / (word + 1))
+            GameMode.Hint -> 100 * power - 10 * power * (getReplyCount() / (word + 1))
+            else -> 50 * power - 5 * power * (getReplyCount() / (word + 1))
         }.toInt().takeIf { it > 0 } ?: 0
 
+        winCoin = score
         addCoin(score)
     }
 }
