@@ -6,7 +6,7 @@
     app:startDestination="@id/homePageFragment">
     <fragment
         android:id="@+id/homePageFragment"
-        android:name="com.example.wordle_1A2B.ui.component.fragment.homepage.HomePageFragment"
+        android:name="com.example.app_1A2B.ui.component.fragment.homepage.HomePageFragment"
         android:label="HomePageFragment" >
         <action
             android:id="@+id/action_homePageFragment_to_gameModeSelectFragment"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.wordle_1A2B.ui.component.fragment.game.game.GameFragment"
+        android:name="com.example.app_1A2B.ui.component.fragment.game.game.GameFragment"
         android:label="GameFragment" >
         <action
             android:id="@+id/action_gameFragment_to_homePageFragment"
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameModeSelectFragment"
-        android:name="com.example.wordle_1A2B.ui.component.fragment.game.game_mode_select.GameModeSelectFragment"
+        android:name="com.example.app_1A2B.ui.component.fragment.game.game_mode_select.GameModeSelectFragment"
         android:label="GameModeSelectFragment" >
         <action
             android:id="@+id/action_gameModeSelectFragment_to_gameFragment"
