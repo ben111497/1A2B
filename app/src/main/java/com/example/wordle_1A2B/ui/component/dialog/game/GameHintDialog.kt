@@ -78,6 +78,7 @@ class GameHintDialog: BaseDialogFragment<GameViewModel, DialogGameHintBinding>(0
                     if (viewModel.isCoinEnough(50)) {
                         viewModel.useHint(position - 1)
                         viewModel.setReduceCoin(50)
+                        requireActivity().showToast("失去 50 金幣")
                         it.dismiss()
                     } else requireActivity().showToast("金幣不足！")
                 }

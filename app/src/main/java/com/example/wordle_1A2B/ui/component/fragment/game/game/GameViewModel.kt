@@ -201,7 +201,7 @@ class GameViewModel constructor(private val local: LocalData): ViewModel() {
         when {
             isGameWin -> {
                 setWinCoin()
-                setMessage("遊戲勝利！")
+                //setMessage("遊戲勝利！")
                 setIsDialogOn(true)
             }
             gameMode == GameMode.Hint || gameMode == GameMode.RepeatAndHint -> {

@@ -101,6 +101,17 @@ object ViewAnimation {
     }
 
     /**
+     * Toast 上升
+     */
+    fun toastSlideUp(context: Context, view: View, duration: Long? = null, result: ((AnimationStatus) -> Unit)? = null) {
+        val anim = AnimationUtils.loadAnimation(context, R.anim.toast_slide_up)
+        anim.setAnimationListener(getAnimationListener(result))
+        duration?.let { anim.duration = it }
+        view.clearAnimation()
+        view.startAnimation(anim)
+    }
+
+    /**
      * 波紋效果
      */
     fun ripple(context: Context, view: View, isLoop: Boolean = false) {

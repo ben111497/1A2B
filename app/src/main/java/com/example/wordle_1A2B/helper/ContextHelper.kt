@@ -4,8 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.util.DisplayMetrics
+import android.view.Gravity
+import android.view.View
 import android.view.WindowInsets
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.wordle_1A2B.R
+import com.example.wordle_1A2B.tools.ViewAnimation
 
 private var toast: Toast? = null
 fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {

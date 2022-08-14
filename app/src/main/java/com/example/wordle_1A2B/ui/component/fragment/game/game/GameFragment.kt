@@ -7,15 +7,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.wordle_1A2B.R
 import com.example.wordle_1A2B.databinding.FragmentGameBinding
+import com.example.wordle_1A2B.helper.*
 import com.example.wordle_1A2B.ui.base.BaseFragment
 import com.example.wordle_1A2B.ui.component.adapter.GameAdapter
 import com.example.wordle_1A2B.ui.component.dialog.game.GameDialog
 import com.example.wordle_1A2B.ui.component.dialog.game.GameHintDialog
 import com.example.wordle_1A2B.ui.component.dialog.show_message.ShowMessageDialog
 import com.example.wordle_1A2B.ui.factory.BaseModelFactory
-import com.example.wordle_1A2B.helper.observe
-import com.example.wordle_1A2B.helper.setOnBackPressed
-import com.example.wordle_1A2B.helper.showToast
 import kotlinx.coroutines.DelicateCoroutinesApi
 
 @DelicateCoroutinesApi
@@ -52,6 +50,8 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
                         Navigation.findNavController(binding?.root ?: return).popBackStack(R.id.homePageFragment, false)
                     }
                 }) }.show(requireActivity().supportFragmentManager, "hi")
+
+                requireActivity().showToast("失去 50 金幣")
             }
         }
 
@@ -96,6 +96,7 @@ class GameFragment: BaseFragment<GameViewModel, FragmentGameBinding>() {
                         viewModel.setReduceCoin(50)
                         it.dismiss()
                         Navigation.findNavController(binding?.root ?: return).popBackStack(R.id.homePageFragment, false)
+                        requireActivity().showToast("失去 50 金幣")
                     }
                 })
             }.show(requireActivity().supportFragmentManager, "message")
